@@ -21,14 +21,15 @@ public class StoryJsonParser implements JsonParser<Story> {
 
     @Override
     public Story parseJson(JSONObject jsonObject) throws JSONException {
+        JSONObject fieldsJsonObj = jsonObject.getJSONObject("fields");
         Story story = new Story();
         story.setId(jsonObject.getString("id"));
         story.setApiUrl(Uri.parse(jsonObject.getString("apiUrl")));
-        story.setByline(jsonObject.getString("byline"));
-        story.setHeadLine(jsonObject.getString("headline"));
-        story.setLastModified(jsonObject.getString("lastModified"));
-        story.setThumbnail(Uri.parse(jsonObject.getString("thumbnail")));
-        story.setBody(jsonObject.getString("body"));
+        story.setByline(fieldsJsonObj.getString("byline"));
+//        story.setHeadLine(jsonObject.getString("headline"));
+        story.setLastModified(fieldsJsonObj.getString("lastModified"));
+        story.setThumbnail(Uri.parse(fieldsJsonObj.getString("thumbnail")));
+//        story.setBody(jsonObject.getString("body"));
         return story;
     }
 }

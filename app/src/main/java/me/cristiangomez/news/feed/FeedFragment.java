@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -18,7 +19,7 @@ import me.cristiangomez.news.data.Story;
 public class FeedFragment extends Fragment implements FeedContract.View {
     private FeedContract.Presenter presenter;
     private ListView listView;
-    private ArrayAdapter<Story> listAdapter;
+    private FeedListAdapter listAdapter;
 
     @Override
     public void showStories(List<Story> stories) {
@@ -43,8 +44,14 @@ public class FeedFragment extends Fragment implements FeedContract.View {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.feed_frag, container, false);
         listView = view.findViewById(R.id.feed_list_view);
-        listAdapter = new ArrayAdapter<>(requireContext(), R.layout.feed_story);
+        listAdapter = new FeedListAdapter(requireContext(), new ArrayList<Story>());
         listView.setAdapter(listAdapter);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.start();
     }
 }

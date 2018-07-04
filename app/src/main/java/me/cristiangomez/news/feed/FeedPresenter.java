@@ -117,16 +117,11 @@ public class FeedPresenter implements FeedContract.Presenter {
                 "    \"isHosted\": false,\n" +
                 "    \"pillarId\": \"pillar/news\",\n" +
                 "    \"pillarName\": \"News\"\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"id\": \"australia-news/2018/jul/05/australia-must-cut-role-of-gas-and-end-climate-war-to-fix-power-prices-business-group-says\",\n" +
-                "    \"type\": \"article\",\n" +
-                "    \"sectionId\": \"australia-news\",\n" +
-                "...";
+                "  }]";
         StoryJsonParser storyJsonParser = new StoryJsonParser();
         try {
             JSONArray jsonArray = new JSONArray(dummyStories);
-            for (int i = 0; i <= jsonArray.length(); i++) {
+            for (int i = 0; i < jsonArray.length(); i++) {
                 stories.add(storyJsonParser.parseJson(jsonArray.getJSONObject(i)));
             }
         } catch (JSONException e) {
