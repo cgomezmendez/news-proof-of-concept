@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="image_large_width">150dp</dimen>
+    <dimen name="image_large_height">150dp</dimen>
+    <dimen name="space_normal">8dp</dimen>
+    <dimen name="space_large">18dp</dimen>
+    <dimen name="font_size_big">16sp</dimen>
+    <dimen name="font_size_normal">14sp</dimen>
+</resources>
