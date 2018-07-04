@@ -24,11 +24,12 @@ public class StoryJsonParser implements JsonParser<Story> {
         JSONObject fieldsJsonObj = jsonObject.getJSONObject("fields");
         Story story = new Story();
         story.setId(jsonObject.getString("id"));
-        story.setApiUrl(Uri.parse(jsonObject.getString("apiUrl")));
-        story.setByline(fieldsJsonObj.getString("byline"));
-//        story.setHeadLine(jsonObject.getString("headline"));
-        story.setLastModified(fieldsJsonObj.getString("lastModified"));
-        story.setThumbnail(Uri.parse(fieldsJsonObj.getString("thumbnail")));
+        story.setApiUrl(Uri.parse(jsonObject.optString("apiUrl")));
+        story.setByline(fieldsJsonObj.optString("byline"));
+        story.setHeadLine(fieldsJsonObj.optString("headline"));
+        story.setLastModified(fieldsJsonObj.optString("lastModified"));
+        story.setThumbnail(Uri.parse(fieldsJsonObj.optString("thumbnail")));
+        story.setTrailText(fieldsJsonObj.optString("trailText"));
 //        story.setBody(jsonObject.getString("body"));
         return story;
     }

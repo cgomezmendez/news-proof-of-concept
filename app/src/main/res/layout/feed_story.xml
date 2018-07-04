@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/space_normal"
+    android:paddingBottom="@dimen/space_normal">
+
     <ImageView
+        android:id="@+id/story_thumbnail"
         android:layout_width="@dimen/image_large_width"
         android:layout_height="@dimen/image_large_height"
-        android:layout_marginTop="@dimen/space_normal"
+        android:layout_marginStart="@dimen/space_normal"
         android:layout_marginLeft="@dimen/space_normal"
-        tools:src="@sample/story_thumbnail.png"
+        android:layout_marginTop="@dimen/space_normal"
         android:scaleType="centerCrop"
-        />
+        tools:src="@sample/story_thumbnail" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,16 +25,20 @@
         android:paddingStart="@dimen/space_normal"
         android:paddingEnd="@dimen/space_normal">
         <TextView
+            android:id="@+id/story_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_size_big"
+            app:fontFamily="@string/font_family_medium"
             tools:text="@sample/story_title"
             />
         <TextView
+            android:id="@+id/story_summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_normal"
             android:textSize="@dimen/font_size_normal"
+            app:fontFamily="@string/font_family_light"
             tools:text="@sample/story_trail_text"
             />
     </LinearLayout>
