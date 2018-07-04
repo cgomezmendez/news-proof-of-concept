@@ -1,6 +1,7 @@
 package me.cristiangomez.news.feed;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,12 @@ public class FeedListAdapter extends ArrayAdapter<Story> {
             this.title.setText(story.getHeadLine());
             this.summary.setText(story.getTrailText());
             if (story.getThumbnail() != null) {
-                new ImageDownloadTask().execute(story.getThumbnail());
+                new ImageDownloadTask(new ImageDownloadTask.ImageDownloadCallback() {
+                    @Override
+                    public void onImageDownloaded(Bitmap bitmap) {
+                        ViewHolder.this.thumbnail.setImageBitmap(bitmap);
+                    }
+                }).execute(story.getThumbnail());
             }
         }
     }
