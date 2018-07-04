@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import java.io.StringReader;
 
-public abstract class JsonParser<T> {
+public interface JsonParser<T> {
     public abstract T parseJsonFromString(String jsonStringSource) throws JSONException;
+    public abstract T parseJson(JSONObject jsonObject) throws JSONException;
 }
