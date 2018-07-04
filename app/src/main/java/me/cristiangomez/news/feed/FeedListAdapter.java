@@ -9,10 +9,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.List;
 
 import me.cristiangomez.news.R;
 import me.cristiangomez.news.data.Story;
+import me.cristiangomez.news.util.ImageDownloadTask;
+import me.cristiangomez.news.util.ImageDownloader;
 
 public class FeedListAdapter extends ArrayAdapter<Story> {
     public FeedListAdapter(Context context, List<Story> stories) {
@@ -50,6 +53,9 @@ public class FeedListAdapter extends ArrayAdapter<Story> {
         void bind(Story story) {
             this.title.setText(story.getHeadLine());
             this.summary.setText(story.getTrailText());
+            if (story.getThumbnail() != null) {
+                new ImageDownloadTask().execute(story.getThumbnail());
+            }
         }
     }
 }
