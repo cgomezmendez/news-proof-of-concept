@@ -4,7 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <fragment
-        android:id="@+id/content"
+        android:id="@+id/feed_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="me.cristiangomez.news.feed.FeedFragment"
