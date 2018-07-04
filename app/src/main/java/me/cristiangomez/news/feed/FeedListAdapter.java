@@ -2,6 +2,7 @@ package me.cristiangomez.news.feed;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 import me.cristiangomez.news.R;
+import me.cristiangomez.news.data.Image;
 import me.cristiangomez.news.data.Story;
 import me.cristiangomez.news.util.ImageDownloadTask;
 import me.cristiangomez.news.util.ImageDownloader;
@@ -44,6 +46,7 @@ public class FeedListAdapter extends ArrayAdapter<Story> {
         private ImageView thumbnail;
         private TextView title;
         private TextView summary;
+        private Uri imageUri;
 
         ViewHolder(View view) {
             this.thumbnail = view.findViewById(R.id.story_thumbnail);
@@ -55,12 +58,20 @@ public class FeedListAdapter extends ArrayAdapter<Story> {
             this.title.setText(story.getHeadLine());
             this.summary.setText(story.getTrailText());
             if (story.getThumbnail() != null) {
+                this.thumbnail.setImageBitmap(null);
+                this.imageUri = story.getThumbnail();
                 new ImageDownloadTask(new ImageDownloadTask.ImageDownloadCallback() {
                     @Override
-                    public void onImageDownloaded(Bitmap bitmap) {
-                        ViewHolder.this.thumbnail.setImageBitmap(bitmap);
+                    public void onImageDownloaded(Image image) {
+                        if (image != null && image.getBitmap() != null
+                                && image.getUri() == ViewHolder.this.imageUri) {
+                            ViewHolder.this.thumbnail.setImageBitmap(image.getBitmap());
+                        }
                     }
                 }).execute(story.getThumbnail());
+            } else {
+                this.imageUri = null;
+                this.thumbnail.setImageBitmap(null);
             }
         }
     }

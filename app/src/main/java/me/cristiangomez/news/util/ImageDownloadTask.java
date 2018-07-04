@@ -6,7 +6,9 @@ import android.os.AsyncTask;
 
 import java.io.IOException;
 
-public class ImageDownloadTask extends AsyncTask<Uri, Void, Bitmap> {
+import me.cristiangomez.news.data.Image;
+
+public class ImageDownloadTask extends AsyncTask<Uri, Void, Image> {
     ImageDownloadCallback callback;
 
     public ImageDownloadTask(ImageDownloadCallback callback) {
@@ -14,24 +16,24 @@ public class ImageDownloadTask extends AsyncTask<Uri, Void, Bitmap> {
     }
 
     @Override
-    protected Bitmap doInBackground(Uri... uris) {
-        Bitmap bitmap = null;
-
+    protected Image doInBackground(Uri... uris) {
+        Image image = new Image();
+        image.setUri(uris[0]);
         try {
-            bitmap = ImageDownloader.downloadImage(uris[0]);
+            image.setBitmap(ImageDownloader.downloadImage(uris[0]));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return bitmap;
+        return image;
     }
 
     @Override
-    protected void onPostExecute(Bitmap bitmap) {
-        super.onPostExecute(bitmap);
-        callback.onImageDownloaded(bitmap);
+    protected void onPostExecute(Image image) {
+        super.onPostExecute(image);
+        callback.onImageDownloaded(image);
     }
 
     public interface ImageDownloadCallback {
-        void onImageDownloaded(Bitmap bitmap);
+        void onImageDownloaded(Image image);
     }
 }
