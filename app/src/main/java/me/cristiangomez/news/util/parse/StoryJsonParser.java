@@ -30,7 +30,7 @@ public class StoryJsonParser implements JsonParser<Story> {
         story.setLastModified(fieldsJsonObj.optString("lastModified"));
         story.setThumbnail(Uri.parse(fieldsJsonObj.optString("thumbnail")));
         story.setTrailText(fieldsJsonObj.optString("trailText"));
-//        story.setBody(jsonObject.getString("body"));
+        story.setBody(fieldsJsonObj.optString("body"));
         return story;
     }
 }

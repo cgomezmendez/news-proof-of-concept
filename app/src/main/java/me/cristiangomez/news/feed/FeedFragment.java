@@ -1,5 +1,6 @@
 package me.cristiangomez.news.feed;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import me.cristiangomez.news.R;
 import me.cristiangomez.news.data.Story;
 import me.cristiangomez.news.data.StorySection;
+import me.cristiangomez.news.story.StoryActivity;
 import me.cristiangomez.news.util.EndLessScrollListener;
 
 public class FeedFragment extends Fragment implements FeedContract.View {
@@ -41,7 +43,8 @@ public class FeedFragment extends Fragment implements FeedContract.View {
 
     @Override
     public void showStoryDetailsUi(String storyId) {
-        //TODO: Implement logic
+        Intent intent = new Intent(getContext(), StoryActivity.class);
+        startActivity(intent);
     }
 
 

@@ -31,7 +31,7 @@ public class StoriesRemoteDataSource implements StoriesDataSource {
     @Override
     public void getStories(@NonNull final LoadStoriesCallback callback, int page) {
         String url = baseUri.buildUpon()
-                .appendQueryParameter("show-fields", "id,webUrl,apiUrl,trailText,headline,lastModified,thumbnail,byline")
+                .appendQueryParameter("show-fields", "id,webUrl,apiUrl,trailText,headline,lastModified,thumbnail,byline,body")
                 .appendQueryParameter("page", page + "").toString();
         HttpURLConnection urlConnection = null;
         try {
