@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import me.cristiangomez.news.R;
 import me.cristiangomez.news.data.Story;
+import me.cristiangomez.news.util.EndLessScrollListener;
 
 public class FeedFragment extends Fragment implements FeedContract.View {
     private FeedContract.Presenter presenter;
@@ -44,6 +44,13 @@ public class FeedFragment extends Fragment implements FeedContract.View {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.feed_frag, container, false);
         listView = view.findViewById(R.id.feed_list_view);
+        listView.setOnScrollListener(new EndLessScrollListener() {
+            @Override
+            public boolean onLoadMore(int page, int totalItemCount) {
+                presenter.loadStories(1);
+                return true;
+            }
+        });
         listAdapter = new FeedListAdapter(requireContext(), new ArrayList<Story>());
         listView.setAdapter(listAdapter);
         return view;

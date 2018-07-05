@@ -33,12 +33,8 @@ public abstract class EndLessScrollListener implements AbsListView.OnScrollListe
         if (totalItemCount < previousTotalItemCount) {
             this.currentPage = this.startingPageIndex;
             this.previousTotalItemCount = totalItemCount;
-            if (totalItemCount < previousTotalItemCount) {
-                this.currentPage = this.startingPageIndex;
-                this.previousTotalItemCount = totalItemCount;
-                if (totalItemCount == 0) {
-                    this.loading = true;
-                }
+            if (totalItemCount == 0) {
+                this.loading = true;
             }
         }
 

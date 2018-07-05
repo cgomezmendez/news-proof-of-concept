@@ -14,7 +14,7 @@ public interface FeedContract {
     }
 
     interface Presenter extends BasePresenter {
-        void loadStories();
+        void loadStories(int page);
         void openStoryDetails(@NonNull Story requestedStory);
     }
 }
