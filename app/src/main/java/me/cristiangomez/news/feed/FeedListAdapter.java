@@ -82,6 +82,7 @@ public class FeedListAdapter extends ArrayAdapter<Story> {
                 this.progressBar.setVisibility(View.INVISIBLE);
                 this.imageUri = null;
                 this.thumbnail.setImageBitmap(null);
+                this.thumbnail.setImageResource(R.drawable.ic_image_black_24dp);
             }
         }
     }

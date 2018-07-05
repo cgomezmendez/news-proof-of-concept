@@ -10,6 +10,7 @@ public interface StoryContract {
     }
 
     interface Presenter extends BasePresenter {
-        void loadStory(String storyId);
+        void loadStory();
+        void setStoryId(String storyId);
     }
 }

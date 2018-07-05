@@ -23,7 +23,6 @@ public class FeedFragment extends Fragment implements FeedContract.View {
     private FeedContract.Presenter presenter;
     private ListView listView;
     private FeedListAdapter listAdapter;
-    private FeedSectionsAdapter sectionsAdapter;
 
     @Override
     public void showStories(final List<Story> stories) {
