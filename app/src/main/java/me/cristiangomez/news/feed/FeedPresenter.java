@@ -24,7 +24,7 @@ public class FeedPresenter implements FeedContract.Presenter {
     public void loadStories(int page) {
         // TODO: implement logic
         List<Story> stories = new ArrayList<>();
-        StoriesRemoteDataSource remoteDataSource = StoriesRemoteDataSource.getIsntance();
+        StoriesRemoteDataSource remoteDataSource = StoriesRemoteDataSource.getInstance();
         remoteDataSource.getStories(new StoriesDataSource.LoadStoriesCallback() {
             @Override
             public void onStoriesLoaded(List<Story> stories) {

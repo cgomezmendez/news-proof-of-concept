@@ -2,6 +2,7 @@ package me.cristiangomez.news.data.source.remote;
 
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.JsonReader;
 
 import java.io.ByteArrayOutputStream;
@@ -29,7 +30,13 @@ public class StoriesRemoteDataSource implements StoriesDataSource {
             public void run() {
                 HttpURLConnection urlConnection = null;
                 try {
-                    urlConnection = (HttpURLConnection) new URL(BuildConfig.API_BASE_URL).openConnection();
+                    Uri url = Uri.parse(BuildConfig.API_BASE_URL)
+                            .buildUpon()
+                            .appendPath("search")
+                            .appendQueryParameter("api-key", BuildConfig.API_KEY)
+                            .appendQueryParameter("show-fields", "id,webUrl,apiUrl,trailText,headline,lastModified,thumbnail,byline")
+                            .build();
+                    urlConnection = (HttpURLConnection) new URL(url.toString()).openConnection();
                     InputStream inputStream = urlConnection.getInputStream();
                     ByteArrayOutputStream result = new ByteArrayOutputStream();
                     byte[] buffer = new byte[1024];
@@ -50,7 +57,7 @@ public class StoriesRemoteDataSource implements StoriesDataSource {
         });
     }
 
-    public static StoriesRemoteDataSource getIsntance() {
+    public static StoriesRemoteDataSource getInstance() {
         if (instance == null) {
             instance = new StoriesRemoteDataSource();
         }
