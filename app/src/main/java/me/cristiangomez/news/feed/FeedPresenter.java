@@ -40,6 +40,7 @@ public class FeedPresenter implements FeedContract.Presenter {
     @Override
     public void openStoryDetails(@NonNull Story requestedStory) {
         // TODO: implement logic
+        feedView.showStoryDetailsUi(requestedStory.getId());
     }
 
     @Override

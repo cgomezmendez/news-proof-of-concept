@@ -10,7 +10,7 @@ import me.cristiangomez.news.data.Story;
 public interface FeedContract {
     interface View extends BaseView<Presenter> {
         void showStories(List<Story> stories);
-        void showTaskDetailsUi(String taskId);
+        void showStoryDetailsUi(String storyId);
     }
 
     interface Presenter extends BasePresenter {

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -14,12 +16,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import me.cristiangomez.news.R;
 import me.cristiangomez.news.data.Story;
+import me.cristiangomez.news.data.StorySection;
 import me.cristiangomez.news.util.EndLessScrollListener;
 
 public class FeedFragment extends Fragment implements FeedContract.View {
     private FeedContract.Presenter presenter;
     private ListView listView;
     private FeedListAdapter listAdapter;
+    private FeedSectionsAdapter sectionsAdapter;
 
     @Override
     public void showStories(final List<Story> stories) {
@@ -37,7 +41,7 @@ public class FeedFragment extends Fragment implements FeedContract.View {
     }
 
     @Override
-    public void showTaskDetailsUi(String taskId) {
+    public void showStoryDetailsUi(String storyId) {
         //TODO: Implement logic
     }
 
@@ -57,6 +61,14 @@ public class FeedFragment extends Fragment implements FeedContract.View {
         });
         listAdapter = new FeedListAdapter(requireContext(), new ArrayList<Story>());
         listView.setAdapter(listAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                if (listAdapter != null) {
+                    presenter.openStoryDetails(listAdapter.getItem(position));
+                }
+            }
+        });
         return view;
     }
 
