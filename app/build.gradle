@@ -10,6 +10,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        buildConfigField("String", "API_BASE_URL", "\"https://content.guardianapis.com/\"")
+        buildConfigField("String", "API_KEY", "\"c2eae936-bcea-40aa-9f0b-794a2bae301d/\"")
     }
     buildTypes {
         release {

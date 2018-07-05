@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -22,7 +24,6 @@ public class ImageDownloader {
         Bitmap bitmap;
         HttpURLConnection httpURLConnection = (HttpURLConnection) new URL(imageUri.toString())
                 .openConnection();
-        
         try {
             InputStream inputStream = httpURLConnection.getInputStream();
             bitmap = BitmapFactory.decodeStream(inputStream);
