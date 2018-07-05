@@ -3,4 +3,5 @@
     <string name="font_family_light">sans-serif-light</string>
     <string name="font_family_medium">sans-serif-medium</string>
     <string name="feed_story_full_story">Full story</string>
+    <string name="feed_title">News Feed</string>
 </resources>
