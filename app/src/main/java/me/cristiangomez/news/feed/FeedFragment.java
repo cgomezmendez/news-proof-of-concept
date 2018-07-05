@@ -22,9 +22,14 @@ public class FeedFragment extends Fragment implements FeedContract.View {
     private FeedListAdapter listAdapter;
 
     @Override
-    public void showStories(List<Story> stories) {
+    public void showStories(final List<Story> stories) {
         // TODO: implement logic
-        listAdapter.addAll(stories);
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                listAdapter.addAll(stories);
+            }
+        });
     }
 
     @Override

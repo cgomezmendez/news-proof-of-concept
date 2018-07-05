@@ -1,5 +1,7 @@
 package me.cristiangomez.news.feed;
 
+import android.os.AsyncTask;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -23,16 +25,19 @@ public class FeedPresenter implements FeedContract.Presenter {
     @Override
     public void loadStories(int page) {
         // TODO: implement logic
-        StoriesRemoteDataSource remoteDataSource = StoriesRemoteDataSource.getInstance();
-        remoteDataSource.getStories(new StoriesDataSource.LoadStoriesCallback() {
+        AsyncTask.execute(new Runnable() {
             @Override
-            public void onStoriesLoaded(List<Story> stories) {
-                FeedPresenter.this.feedView.showStories(stories);
-            }
+            public void run() {
+                StoriesRemoteDataSource.getInstance().getStories(new StoriesDataSource.LoadStoriesCallback() {
+                    @Override
+                    public void onStoriesLoaded(List<Story> stories) {
+                        FeedPresenter.this.feedView.showStories(stories);
+                    }
+                    @Override
+                    public void onNoDataAvailable() {
 
-            @Override
-            public void onNoDataAvailable() {
-
+                    }
+                });
             }
         });
     }
