@@ -1,10 +1,6 @@
 package me.cristiangomez.news.data.source.remote;
 
-import android.content.Context;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.util.JsonReader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,13 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import me.cristiangomez.news.BuildConfig;
-import me.cristiangomez.news.data.ApiResponse;
-import me.cristiangomez.news.data.Story;
 import me.cristiangomez.news.data.source.ApiResponseStories;
 import me.cristiangomez.news.data.source.StoriesDataSource;
 import me.cristiangomez.news.util.parse.ApiResponseJsonParser;
@@ -32,7 +24,7 @@ public class StoriesRemoteDataSource implements StoriesDataSource {
     }
 
     @Override
-    public void getStories(@NonNull final LoadStoriesCallback callback) {
+    public void getStories(@NonNull final LoadStoriesCallback callback, int page) {
         HttpURLConnection urlConnection = null;
         try {
             String url = Uri.parse(BuildConfig.API_BASE_URL)
@@ -40,6 +32,7 @@ public class StoriesRemoteDataSource implements StoriesDataSource {
                     .appendPath("search")
                     .appendQueryParameter("api-key", BuildConfig.API_KEY)
                     .appendQueryParameter("show-fields", "id,webUrl,apiUrl,trailText,headline,lastModified,thumbnail,byline")
+                    .appendQueryParameter("page", page + "")
                     .build()
                     .toString();
             urlConnection = (HttpURLConnection) new URL(url).openConnection();

@@ -52,7 +52,7 @@ public class FeedFragment extends Fragment implements FeedContract.View {
         listView.setOnScrollListener(new EndLessScrollListener() {
             @Override
             public boolean onLoadMore(int page, int totalItemCount) {
-                presenter.loadStories(1);
+                presenter.loadStories(page);
                 return true;
             }
         });

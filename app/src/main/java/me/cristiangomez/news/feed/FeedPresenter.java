@@ -2,17 +2,12 @@ package me.cristiangomez.news.feed;
 
 import android.os.AsyncTask;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import me.cristiangomez.news.data.Story;
 import me.cristiangomez.news.data.source.StoriesDataSource;
 import me.cristiangomez.news.data.source.remote.StoriesRemoteDataSource;
-import me.cristiangomez.news.util.parse.StoryJsonParser;
 
 public class FeedPresenter implements FeedContract.Presenter {
     private final FeedContract.View feedView;
@@ -23,7 +18,7 @@ public class FeedPresenter implements FeedContract.Presenter {
     }
 
     @Override
-    public void loadStories(int page) {
+    public void loadStories(final int page) {
         // TODO: implement logic
         AsyncTask.execute(new Runnable() {
             @Override
@@ -37,7 +32,7 @@ public class FeedPresenter implements FeedContract.Presenter {
                     public void onNoDataAvailable() {
 
                     }
-                });
+                }, page);
             }
         });
     }
