@@ -1,10 +1,10 @@
-package me.cristiangomez.news.data.local.database;
+package me.cristiangomez.news.data.source.local.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import me.cristiangomez.news.data.local.database.NewsContract.Story;
+import me.cristiangomez.news.data.source.local.database.NewsContract.Story;
 
 public class NewsDbHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;

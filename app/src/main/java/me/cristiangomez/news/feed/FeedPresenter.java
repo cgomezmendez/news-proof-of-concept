@@ -5,25 +5,29 @@ import android.os.AsyncTask;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import me.cristiangomez.news.data.StoriesRepository;
 import me.cristiangomez.news.data.Story;
 import me.cristiangomez.news.data.source.StoriesDataSource;
+import me.cristiangomez.news.data.source.local.StoryLocalDataSource;
 import me.cristiangomez.news.data.source.remote.StoriesRemoteDataSource;
 
 public class FeedPresenter implements FeedContract.Presenter {
     private final FeedContract.View feedView;
+    private StoriesRepository storiesRepository;
 
     public FeedPresenter(@NonNull  FeedContract.View feedView) {
         this.feedView = feedView;
         feedView.setPresenter(this);
+        storiesRepository = StoriesRepository.getInstance(StoriesRemoteDataSource.getInstance(),
+                new StoryLocalDataSource());
     }
 
     @Override
     public void loadStories(final int page) {
-        // TODO: implement logic
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                StoriesRemoteDataSource.getInstance().getStories(new StoriesDataSource.LoadStoriesCallback() {
+                storiesRepository.getStories(new StoriesDataSource.LoadStoriesCallback() {
                     @Override
                     public void onStoriesLoaded(List<Story> stories) {
                         FeedPresenter.this.feedView.showStories(stories);

@@ -1,4 +1,4 @@
-package me.cristiangomez.news.data.local.database;
+package me.cristiangomez.news.data.source.local.database;
 
 import android.provider.BaseColumns;
 

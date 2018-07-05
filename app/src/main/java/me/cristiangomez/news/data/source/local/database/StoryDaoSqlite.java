@@ -1,4 +1,4 @@
-package me.cristiangomez.news.data.local.database;
+package me.cristiangomez.news.data.source.local.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.List;
 
 import me.cristiangomez.news.data.Story;
-import me.cristiangomez.news.data.local.StoryDao;
+import me.cristiangomez.news.data.source.local.StoryDao;
 
 public class StoryDaoSqlite implements StoryDao {
     NewsDbHelper dbHelper;

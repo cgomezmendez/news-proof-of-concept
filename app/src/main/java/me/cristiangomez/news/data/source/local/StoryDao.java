@@ -1,4 +1,4 @@
-package me.cristiangomez.news.data.local;
+package me.cristiangomez.news.data.source.local;
 
 import java.util.List;
 
