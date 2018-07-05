@@ -5,16 +5,24 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.util.JsonReader;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import me.cristiangomez.news.BuildConfig;
+import me.cristiangomez.news.data.ApiResponse;
+import me.cristiangomez.news.data.Story;
+import me.cristiangomez.news.data.source.ApiResponseStories;
 import me.cristiangomez.news.data.source.StoriesDataSource;
+import me.cristiangomez.news.util.parse.ApiResponseJsonParser;
 
 public class StoriesRemoteDataSource implements StoriesDataSource {
     private static StoriesRemoteDataSource instance;
@@ -24,19 +32,20 @@ public class StoriesRemoteDataSource implements StoriesDataSource {
     }
 
     @Override
-    public void getStories(@NonNull LoadStoriesCallback callback) {
+    public void getStories(@NonNull final LoadStoriesCallback callback) {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 HttpURLConnection urlConnection = null;
                 try {
-                    Uri url = Uri.parse(BuildConfig.API_BASE_URL)
+                    String url = Uri.parse(BuildConfig.API_BASE_URL)
                             .buildUpon()
                             .appendPath("search")
                             .appendQueryParameter("api-key", BuildConfig.API_KEY)
                             .appendQueryParameter("show-fields", "id,webUrl,apiUrl,trailText,headline,lastModified,thumbnail,byline")
-                            .build();
-                    urlConnection = (HttpURLConnection) new URL(url.toString()).openConnection();
+                            .build()
+                            .toString();
+                    urlConnection = (HttpURLConnection) new URL(url).openConnection();
                     InputStream inputStream = urlConnection.getInputStream();
                     ByteArrayOutputStream result = new ByteArrayOutputStream();
                     byte[] buffer = new byte[1024];
@@ -44,9 +53,16 @@ public class StoriesRemoteDataSource implements StoriesDataSource {
                     while ((length = inputStream.read(buffer)) != -1) {
                         result.write(buffer, 0, length);
                     }
-                    String resultStr = result.toString("UTF-8");
-
+                    ApiResponseJsonParser jsonParser = new ApiResponseJsonParser();
+                    ApiResponseStories apiResponse = jsonParser
+                            .parseJson(new JSONObject(result.toString("UTF-8"))
+                    .getJSONObject("response"));
+                    if (apiResponse.getStatus().equalsIgnoreCase("ok")) {
+                        callback.onStoriesLoaded(apiResponse.getResults());
+                    }
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
                     e.printStackTrace();
                 } finally {
                     if (urlConnection != null) {
