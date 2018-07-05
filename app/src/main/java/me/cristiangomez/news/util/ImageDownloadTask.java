@@ -21,7 +21,7 @@ public class ImageDownloadTask extends AsyncTask<Uri, Void, Image> {
     protected Image doInBackground(Uri... uris) {
         Image image = new Image();
         image.setUri(uris[0]);
-        image.setBitmap(imageCache.memoryCache.get(image.getUri()));
+        image.setBitmap(imageCache.getBitmap(image.getUri().toString()));
         if (image.getBitmap() == null) {
             try {
                 image.setBitmap(ImageDownloader.downloadImage(image.getUri()));
@@ -35,7 +35,7 @@ public class ImageDownloadTask extends AsyncTask<Uri, Void, Image> {
     @Override
     protected void onPostExecute(Image image) {
         super.onPostExecute(image);
-        imageCache.memoryCache.put(image.getUri(), image.getBitmap());
+        imageCache.addToCache(image.getUri().toString(), image.getBitmap());
         callback.onImageDownloaded(image);
     }
 
