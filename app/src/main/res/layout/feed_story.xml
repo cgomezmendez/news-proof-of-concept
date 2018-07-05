@@ -8,16 +8,26 @@
     android:paddingTop="@dimen/space_normal"
     android:paddingBottom="@dimen/space_normal">
 
-    <ImageView
-        android:id="@+id/story_thumbnail"
+    <FrameLayout
         android:layout_width="@dimen/image_large_width"
-        android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/space_normal"
-        android:layout_marginLeft="@dimen/space_normal"
-        android:layout_marginTop="@dimen/space_normal"
-        android:minHeight="@dimen/image_large_height"
-        android:scaleType="centerCrop"
-        tools:srcCompat="@sample/story_thumbnail" />
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/story_thumbnail"
+            android:layout_width="@dimen/image_large_width"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/space_normal"
+            android:layout_marginLeft="@dimen/space_normal"
+            android:layout_marginTop="@dimen/space_normal"
+            android:minHeight="@dimen/image_large_height"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@sample/story_thumbnail" />
+        <ProgressBar
+            android:id="@+id/story_thumbnail_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            />
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,9 +57,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/space_normal"
-            android:layout_marginTop="@dimen/space_normal"
             android:layout_gravity="end"
+            android:layout_marginTop="@dimen/space_normal"
+            android:layout_marginBottom="@dimen/space_normal"
             android:orientation="horizontal">
 
             <TextView
