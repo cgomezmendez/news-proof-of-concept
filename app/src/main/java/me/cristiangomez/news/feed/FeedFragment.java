@@ -44,6 +44,7 @@ public class FeedFragment extends Fragment implements FeedContract.View {
     @Override
     public void showStoryDetailsUi(String storyId) {
         Intent intent = new Intent(getContext(), StoryActivity.class);
+        intent.putExtra(StoryActivity.EXTRA_STORY_ID, storyId);
         startActivity(intent);
     }
 

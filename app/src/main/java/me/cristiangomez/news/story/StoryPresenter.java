@@ -13,7 +13,8 @@ public class StoryPresenter implements StoryContract.Presenter {
     private StoriesRepository storiesRepository;
     private StoryContract.View storyView;
 
-    public StoryPresenter(StoryContract.View storyView) {
+    public StoryPresenter(StoryContract.View storyView, String storyId) {
+        this.storyId = storyId;
         this.storyView = storyView;
         storyView.setPresenter(this);
         this.storiesRepository = StoriesRepository.getInstance(StoriesRemoteDataSource.getInstance(),
@@ -28,6 +29,7 @@ public class StoryPresenter implements StoryContract.Presenter {
                 storiesRepository.getStory(new StoriesDataSource.LoadStoryCallback() {
                     @Override
                     public void onStoryLoaded(Story story) {
+                        storyView.showStory(story);
                     }
 
                     @Override
@@ -42,10 +44,5 @@ public class StoryPresenter implements StoryContract.Presenter {
     @Override
     public void start() {
         loadStory();
-    }
-
-    @Override
-    public void setStoryId(String storyId) {
-        this.storyId = storyId;
     }
 }

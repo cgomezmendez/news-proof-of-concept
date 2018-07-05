@@ -72,4 +72,22 @@ public class StoriesRepository implements StoriesDataSource {
         }
         isCacheDirty = false;
     }
+
+    @Override
+    public void getStory(@NonNull LoadStoryCallback callback, String id) {
+        Story cachedStory = getStoryWithId(id);
+        if (cachedStory != null) {
+            callback.onStoryLoaded(cachedStory);
+            return;
+        }
+    }
+
+    private Story getStoryWithId(@NonNull String id) {
+        if (cachedStories == null || cachedStories.isEmpty()) {
+            return null;
+        } else {
+            return cachedStories.get(id);
+        }
+    }
+
 }
