@@ -9,4 +9,9 @@ public class StoryLocalDataSource implements StoriesDataSource {
         //TODO: add logic
         callback.onNoDataAvailable();
     }
+
+    @Override
+    public void getStory(@NonNull LoadStoryCallback callback, String id) {
+        //TODO: Implement logic
+    }
 }

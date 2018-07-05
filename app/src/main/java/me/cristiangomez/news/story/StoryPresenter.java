@@ -12,7 +12,6 @@ public class StoryPresenter implements StoryContract.Presenter {
     private String storyId;
     private StoriesRepository storiesRepository;
     private StoryContract.View storyView;
-    private Story story;
 
     public StoryPresenter(StoryContract.View storyView) {
         this.storyView = storyView;
@@ -26,6 +25,16 @@ public class StoryPresenter implements StoryContract.Presenter {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
+                storiesRepository.getStory(new StoriesDataSource.LoadStoryCallback() {
+                    @Override
+                    public void onStoryLoaded(Story story) {
+                    }
+
+                    @Override
+                    public void onNoDataAvailable() {
+
+                    }
+                }, storyId);
             }
         });
     }

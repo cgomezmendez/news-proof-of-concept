@@ -13,6 +13,7 @@ import java.net.URL;
 
 import androidx.annotation.NonNull;
 import me.cristiangomez.news.BuildConfig;
+import me.cristiangomez.news.data.Story;
 import me.cristiangomez.news.data.source.ApiResponseStories;
 import me.cristiangomez.news.data.source.StoriesDataSource;
 import me.cristiangomez.news.util.parse.ApiResponseJsonParser;
@@ -66,5 +67,10 @@ public class StoriesRemoteDataSource implements StoriesDataSource {
             instance = new StoriesRemoteDataSource();
         }
         return instance;
+    }
+
+    @Override
+    public void getStory(@NonNull LoadStoryCallback callback, String id) {
+        //TODO: Implement logic
     }
 }

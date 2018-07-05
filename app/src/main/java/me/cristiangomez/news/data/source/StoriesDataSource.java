@@ -11,5 +11,12 @@ public interface StoriesDataSource {
         void onNoDataAvailable();
     }
 
+    interface LoadStoryCallback {
+        void onStoryLoaded(Story story);
+        void onNoDataAvailable();
+    }
+
     void getStories(@NonNull LoadStoriesCallback callback, int page);
+
+    void getStory(@NonNull LoadStoryCallback callback, String id);
 }
