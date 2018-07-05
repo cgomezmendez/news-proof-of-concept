@@ -83,6 +83,9 @@ public class Story {
 
     public void setThumbnail(Uri thumbnail) {
         this.thumbnail = thumbnail;
+        if (this.thumbnail != null && this.thumbnail.toString().isEmpty()) {
+            this.thumbnail = null;
+        }
     }
 
     public String getByline() {

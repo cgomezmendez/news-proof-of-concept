@@ -3,6 +3,7 @@ package me.cristiangomez.news.feed;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import me.cristiangomez.news.util.ImageDownloadTask;
 import me.cristiangomez.news.util.ImageDownloader;
 
 public class FeedListAdapter extends ArrayAdapter<Story> {
+
     public FeedListAdapter(Context context, List<Story> stories) {
         super(context, R.layout.feed_story, stories);
     }

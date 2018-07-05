@@ -10,19 +10,24 @@ import me.cristiangomez.news.data.Image;
 
 public class ImageDownloadTask extends AsyncTask<Uri, Void, Image> {
     ImageDownloadCallback callback;
+    ImageCache imageCache;
 
     public ImageDownloadTask(ImageDownloadCallback callback) {
         this.callback = callback;
+        imageCache = ImageCache.getInstance();
     }
 
     @Override
     protected Image doInBackground(Uri... uris) {
         Image image = new Image();
         image.setUri(uris[0]);
-        try {
-            image.setBitmap(ImageDownloader.downloadImage(uris[0]));
-        } catch (IOException e) {
-            e.printStackTrace();
+        image.setBitmap(imageCache.memoryCache.get(image.getUri()));
+        if (image.getBitmap() == null) {
+            try {
+                image.setBitmap(ImageDownloader.downloadImage(image.getUri()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return image;
     }
@@ -30,6 +35,7 @@ public class ImageDownloadTask extends AsyncTask<Uri, Void, Image> {
     @Override
     protected void onPostExecute(Image image) {
         super.onPostExecute(image);
+        imageCache.memoryCache.put(image.getUri(), image.getBitmap());
         callback.onImageDownloaded(image);
     }
 
