@@ -20,7 +20,7 @@ public class NewsDbHelper extends SQLiteOpenHelper {
             Story.COLUMN_NAME_TRAIL_TEXT + " STRING," +
             Story.COLUMN_NAME_WEB_URL + "STRING" +
             ")";
-    private static final String SQL_DELETE_STORIES = "DROP TABLE IF EXISTS" + Story.TABLE_NAME;
+    private static final String SQL_DELETE_STORIES = "DROP TABLE IF EXISTS " + Story.TABLE_NAME;
 
     public NewsDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
