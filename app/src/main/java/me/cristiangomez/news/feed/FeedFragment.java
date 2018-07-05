@@ -23,7 +23,6 @@ public class FeedFragment extends Fragment implements FeedContract.View {
 
     @Override
     public void showStories(final List<Story> stories) {
-        // TODO: implement logic
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {

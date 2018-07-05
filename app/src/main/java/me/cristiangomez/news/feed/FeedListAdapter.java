@@ -3,6 +3,7 @@ package me.cristiangomez.news.feed;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.text.Html;
 import android.util.LruCache;
 import android.view.LayoutInflater;
@@ -76,7 +77,7 @@ public class FeedListAdapter extends ArrayAdapter<Story> {
                             ViewHolder.this.thumbnail.setImageBitmap(image.getBitmap());
                         }
                     }
-                }).execute(story.getThumbnail());
+                }).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, story.getThumbnail());
             } else {
                 this.progressBar.setVisibility(View.INVISIBLE);
                 this.imageUri = null;
