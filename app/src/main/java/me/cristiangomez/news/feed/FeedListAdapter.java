@@ -3,6 +3,7 @@ package me.cristiangomez.news.feed;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.text.Html;
 import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +59,7 @@ public class FeedListAdapter extends ArrayAdapter<Story> {
 
         void bind(Story story) {
             this.title.setText(story.getHeadLine());
-            this.summary.setText(story.getTrailText());
+            this.summary.setText(Html.fromHtml(story.getTrailText()));
             if (story.getThumbnail() != null) {
                 this.thumbnail.setImageBitmap(null);
                 this.imageUri = story.getThumbnail();

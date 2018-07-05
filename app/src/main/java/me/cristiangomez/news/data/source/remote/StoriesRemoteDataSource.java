@@ -19,22 +19,22 @@ import me.cristiangomez.news.util.parse.ApiResponseJsonParser;
 
 public class StoriesRemoteDataSource implements StoriesDataSource {
     private static StoriesRemoteDataSource instance;
+    private Uri baseUri = Uri.parse(BuildConfig.API_BASE_URL)
+            .buildUpon()
+            .appendPath("search")
+            .appendQueryParameter("api-key", BuildConfig.API_KEY)
+            .build();
 
     private StoriesRemoteDataSource() {
     }
 
     @Override
     public void getStories(@NonNull final LoadStoriesCallback callback, int page) {
+        String url = baseUri.buildUpon()
+                .appendQueryParameter("show-fields", "id,webUrl,apiUrl,trailText,headline,lastModified,thumbnail,byline")
+                .appendQueryParameter("page", page + "").toString();
         HttpURLConnection urlConnection = null;
         try {
-            String url = Uri.parse(BuildConfig.API_BASE_URL)
-                    .buildUpon()
-                    .appendPath("search")
-                    .appendQueryParameter("api-key", BuildConfig.API_KEY)
-                    .appendQueryParameter("show-fields", "id,webUrl,apiUrl,trailText,headline,lastModified,thumbnail,byline")
-                    .appendQueryParameter("page", page + "")
-                    .build()
-                    .toString();
             urlConnection = (HttpURLConnection) new URL(url).openConnection();
             InputStream inputStream = urlConnection.getInputStream();
             ByteArrayOutputStream result = new ByteArrayOutputStream();
