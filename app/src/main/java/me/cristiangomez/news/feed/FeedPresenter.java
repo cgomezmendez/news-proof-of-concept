@@ -33,12 +33,12 @@ public class FeedPresenter implements FeedContract.Presenter {
                     @Override
                     public void onStoriesLoaded(List<Story> stories) {
                         isRequestInProgress = false;
-                        feedView.hideRefreshLoadingAnimation();
+                        feedView.hideLoadingAnimation();
                         FeedPresenter.this.feedView.showStories(stories);
                     }
                     @Override
                     public void onNoDataAvailable() {
-                        feedView.hideRefreshLoadingAnimation();
+                        feedView.hideLoadingAnimation();
                         isRequestInProgress = false;
                     }
                 }, page);

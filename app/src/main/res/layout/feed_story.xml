@@ -19,8 +19,7 @@
             android:layout_marginLeft="@dimen/space_normal"
             android:layout_marginTop="@dimen/space_normal"
             android:minHeight="@dimen/image_large_height"
-            android:scaleType="centerCrop"
-            tools:srcCompat="@sample/story_thumbnail" />
+            android:scaleType="centerCrop" />
         <ProgressBar
             android:id="@+id/story_thumbnail_progress_bar"
             android:layout_width="wrap_content"

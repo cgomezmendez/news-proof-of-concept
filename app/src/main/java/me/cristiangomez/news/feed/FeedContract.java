@@ -12,7 +12,7 @@ public interface FeedContract {
         void showStories(List<Story> stories);
         void showStoryDetailsUi(String storyId);
 
-        void hideRefreshLoadingAnimation();
+        void hideLoadingAnimation();
 
         void showRefreshLoadingAnimation();
     }

@@ -27,6 +27,7 @@ public class FeedFragment extends Fragment implements FeedContract.View {
     private ListView listView;
     private FeedListAdapter listAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private View endLessScrollProgressView;
 
     @Override
     public void showStories(final List<Story> stories) {
@@ -58,6 +59,7 @@ public class FeedFragment extends Fragment implements FeedContract.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.feed_frag, container, false);
+        endLessScrollProgressView = view.findViewById(R.id.feed_endless_progress);
         swipeRefreshLayout = view.findViewById(R.id.feed_swipe_container);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -69,6 +71,7 @@ public class FeedFragment extends Fragment implements FeedContract.View {
         listView.setOnScrollListener(new EndLessScrollListener() {
             @Override
             public boolean onLoadMore(int page, int totalItemCount) {
+                endLessScrollProgressView.setVisibility(View.VISIBLE);
                 presenter.loadStories(page);
                 return true;
             }
@@ -93,12 +96,13 @@ public class FeedFragment extends Fragment implements FeedContract.View {
     }
 
     @Override
-    public void hideRefreshLoadingAnimation() {
+    public void hideLoadingAnimation() {
         if (getActivity() != null) {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     swipeRefreshLayout.setRefreshing(false);
+                    endLessScrollProgressView.setVisibility(View.INVISIBLE);
                 }
             });
         }
