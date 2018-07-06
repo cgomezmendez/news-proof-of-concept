@@ -6,6 +6,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,7 +27,7 @@ public class StoryFragment extends Fragment implements StoryContract.View {
     private ImageView thumbnailView;
     private ProgressBar progressBarView;
     private TextView titleView;
-    private TextView contentView;
+    private WebView contentView;
 
     @Nullable
     @Override
@@ -45,7 +46,8 @@ public class StoryFragment extends Fragment implements StoryContract.View {
             @Override
             public void run() {
                 titleView.setText(story.getWebTitle());
-                contentView.setText(Html.fromHtml(story.getBody()));
+                contentView.getSettings().setJavaScriptEnabled(true);
+                contentView.loadData(story.getBody(), "text/html", "UTF-8");
                 if (story.getThumbnail() != null && !story.getThumbnail().toString().isEmpty()) {
                     new ImageDownloadTask(new ImageDownloadTask.ImageDownloadCallback() {
                         @Override
