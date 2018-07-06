@@ -3,15 +3,16 @@ package me.cristiangomez.news.data;
 import android.net.Uri;
 
 public class Story {
-    String id;
-    Uri webUrl;
-    Uri apiUrl;
-    String trailText;
-    String headLine;
-    String lastModified;
-    Uri thumbnail;
-    String byline;
-    String body;
+    private String id;
+    private Uri webUrl;
+    private Uri apiUrl;
+    private String trailText;
+    private String headLine;
+    private String lastModified;
+    private Uri thumbnail;
+    private String byline;
+    private String body;
+    private String webTitle;
 
     public Story() {
     }
@@ -98,6 +99,14 @@ public class Story {
 
     public String getBody() {
         return body;
+    }
+
+    public String getWebTitle() {
+        return webTitle;
+    }
+
+    public void setWebTitle(String webTitle) {
+        this.webTitle = webTitle;
     }
 
     public void setBody(String body) {

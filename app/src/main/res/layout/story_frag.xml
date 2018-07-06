@@ -1,19 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/story_thumbnail"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/image_big_height"
-        android:minHeight="@dimen/image_big_width"
-        />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/story_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_big_height"
+            android:minHeight="@dimen/image_big_width"
+            android:scaleType="centerCrop" />
         <ProgressBar
             android:id="@+id/story_thumbnail_progress_bar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            tools:visibility="gone"
+            />
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_small"
+        android:layout_marginStart="@dimen/space_medium"
+        android:layout_marginRight="@dimen/space_medium"
+        android:layout_marginEnd="@dimen/space_medium"
+        android:layout_marginLeft="@dimen/space_medium"
+        android:textSize="@dimen/font_size_big"
+        app:fontFamily="@string/font_family_medium"
+        tools:text="@sample/story_title"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_small"
+        android:layout_marginStart="@dimen/space_medium"
+        android:layout_marginRight="@dimen/space_medium"
+        android:layout_marginEnd="@dimen/space_medium"
+        android:layout_marginLeft="@dimen/space_medium"
+        android:textSize="@dimen/font_size_normal"
+        app:fontFamily="@string/font_family_light"
+        />
 </LinearLayout>

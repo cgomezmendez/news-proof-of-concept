@@ -62,7 +62,7 @@ public class FeedListAdapter extends ArrayAdapter<Story> {
         }
 
         void bind(Story story) {
-            this.title.setText(story.getHeadLine());
+            this.title.setText(story.getWebTitle());
             this.summary.setText(Html.fromHtml(story.getTrailText()));
             if (story.getThumbnail() != null) {
                 this.imageUri = story.getThumbnail();

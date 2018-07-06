@@ -68,7 +68,7 @@ public class StoriesRepository implements StoriesDataSource {
             cachedStories = new LinkedHashMap<>();
         }
         for (Story story: stories) {
-            cachedStories.put(story.id, story);
+            cachedStories.put(story.getId(), story);
         }
         isCacheDirty = false;
     }

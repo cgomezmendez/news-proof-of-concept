@@ -2,6 +2,7 @@ package me.cristiangomez.news.story;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +25,18 @@ public class StoryFragment extends Fragment implements StoryContract.View {
     StoryContract.Presenter presenter;
     private ImageView thumbnailView;
     private ProgressBar progressBarView;
+    private TextView titleView;
+    private TextView contentView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.story_frag, container, false);
+        View view = inflater.inflate(R.layout.story_frag, container, false);
+        thumbnailView = view.findViewById(R.id.story_thumbnail);
+        progressBarView = view.findViewById(R.id.story_thumbnail_progress_bar);
+        titleView = view.findViewById(R.id.story_title);
+        contentView = view.findViewById(R.id.story_content);
+        return view;
     }
 
     @Override
@@ -36,6 +44,8 @@ public class StoryFragment extends Fragment implements StoryContract.View {
         requireActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                titleView.setText(story.getWebTitle());
+                contentView.setText(Html.fromHtml(story.getBody()));
                 if (story.getThumbnail() != null && !story.getThumbnail().toString().isEmpty()) {
                     new ImageDownloadTask(new ImageDownloadTask.ImageDownloadCallback() {
                         @Override

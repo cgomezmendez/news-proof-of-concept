@@ -31,6 +31,7 @@ public class StoryJsonParser implements JsonParser<Story> {
         story.setThumbnail(Uri.parse(fieldsJsonObj.optString("thumbnail")));
         story.setTrailText(fieldsJsonObj.optString("trailText"));
         story.setBody(fieldsJsonObj.optString("body"));
+        story.setWebTitle(jsonObject.optString("webTitle"));
         return story;
     }
 }
