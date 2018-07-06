@@ -2,13 +2,13 @@ package me.cristiangomez.news.data;
 
 public class DrawerItem {
     private String id;
-    private String title;
+    private int title;
     private int icon;
 
     public DrawerItem() {
     }
 
-    public DrawerItem(String id, String title, int icon) {
+    public DrawerItem(String id, int title, int icon) {
         this.id = id;
         this.title = title;
         this.icon = icon;
@@ -22,11 +22,11 @@ public class DrawerItem {
         this.id = id;
     }
 
-    public String getTitle() {
+    public int getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(int title) {
         this.title = title;
     }
 
