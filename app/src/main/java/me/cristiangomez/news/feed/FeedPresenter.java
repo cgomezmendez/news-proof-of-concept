@@ -15,6 +15,7 @@ public class FeedPresenter implements FeedContract.Presenter {
     private final FeedContract.View feedView;
     private StoriesRepository storiesRepository;
     private boolean isRequestInProgress;
+    private String section;
 
     public FeedPresenter(@NonNull  FeedContract.View feedView) {
         this.feedView = feedView;
@@ -42,7 +43,7 @@ public class FeedPresenter implements FeedContract.Presenter {
                         feedView.showErrorWhileLoading();
                         isRequestInProgress = false;
                     }
-                }, page);
+                }, page, section);
             }
         });
     }

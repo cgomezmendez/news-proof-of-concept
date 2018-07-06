@@ -16,7 +16,7 @@ public interface StoriesDataSource {
         void onNoDataAvailable();
     }
 
-    void getStories(@NonNull LoadStoriesCallback callback, int page);
+    void getStories(@NonNull LoadStoriesCallback callback, int page, String section);
 
     void getStory(@NonNull LoadStoryCallback callback, String id);
 }

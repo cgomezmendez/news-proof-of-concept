@@ -34,7 +34,7 @@ public class StoriesRepository implements StoriesDataSource {
     }
 
     @Override
-    public void getStories(@NonNull final LoadStoriesCallback callback, final int page) {
+    public void getStories(@NonNull final LoadStoriesCallback callback, final int page, final String section) {
         localDataSource.getStories(new LoadStoriesCallback() {
             @Override
             public void onStoriesLoaded(List<Story> stories) {
@@ -43,12 +43,14 @@ public class StoriesRepository implements StoriesDataSource {
 
             @Override
             public void onNoDataAvailable() {
-                getStoriesFromRemoteDataSource(callback, page);
+                getStoriesFromRemoteDataSource(callback, page,
+                        section);
             }
-        }, page);
+        }, page, section);
     }
 
-    private void getStoriesFromRemoteDataSource(@NonNull final LoadStoriesCallback callback, int page) {
+    private void getStoriesFromRemoteDataSource(@NonNull final LoadStoriesCallback callback, int page,
+                                                String section) {
         remoteDataSource.getStories(new LoadStoriesCallback() {
             @Override
             public void onStoriesLoaded(List<Story> stories) {
@@ -60,7 +62,7 @@ public class StoriesRepository implements StoriesDataSource {
             public void onNoDataAvailable() {
                 callback.onNoDataAvailable();
             }
-        }, page);
+        }, page, section);
     }
 
     private void refreshCache(List<Story> stories) {

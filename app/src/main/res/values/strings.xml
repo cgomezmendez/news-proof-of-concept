@@ -17,12 +17,9 @@
     <string name="nav_edition_international">International edition</string>
     <string name="nav_world">World</string>
     <string name="nav_sports">Sports</string>
-    <string name="about_message">![CDATA[
-        <h1>News App Proof Of concept</h1>
+    <string name="about_message"><![CDATA[<html><h1>News App Proof Of concept</h1>
         <p>Proof of concept app using <a href="https://open-platform.theguardian.com/documentation/">The Guardian Api</a>.
             As per <a href="https://www.upwork.com/jobs/~01f100073dc9a61db1">requirements</a>using no external libraries only android/java sdk.
         </p>
-        <p>Contact me at <a href="mailto:cristiangomezmendez@gmail.com">cristiangomezmendez@gmail.com</a></p>
-        ]]
-    </string>
+        <p>Contact me at <a href="mailto:cristiangomezmendez@gmail.com">cristiangomezmendez@gmail.com</a></p></html>]]> </string>
 </resources>

@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import me.cristiangomez.news.BuildConfig;
-import me.cristiangomez.news.data.Story;
 import me.cristiangomez.news.data.source.ApiResponseStories;
 import me.cristiangomez.news.data.source.StoriesDataSource;
 import me.cristiangomez.news.util.parse.ApiResponseJsonParser;
@@ -31,11 +30,15 @@ public class StoriesRemoteDataSource implements StoriesDataSource {
     }
 
     @Override
-    public void getStories(@NonNull final LoadStoriesCallback callback, int page) {
-        String url = baseUri.buildUpon()
+    public void getStories(@NonNull final LoadStoriesCallback callback, int page, String section) {
+        Uri.Builder uriBuilder = baseUri.buildUpon()
                 .appendQueryParameter("show-fields",
                         "id,webUrl,apiUrl,trailText,headline,lastModified,thumbnail,byline,body")
-                .appendQueryParameter("page", page + "").toString();
+                .appendQueryParameter("page", page + "");
+        if (section != null && !section.isEmpty()) {
+            uriBuilder.appendQueryParameter("section", section);
+        }
+        String url = uriBuilder.toString();
         HttpURLConnection urlConnection = null;
         try {
             urlConnection = (HttpURLConnection) new URL(url).openConnection();

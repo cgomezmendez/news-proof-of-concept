@@ -45,16 +45,19 @@ public class FeedActivity extends AppCompatActivity {
         drawerItems.add(new DrawerItem("edition_us", R.string.nav_edition_us, R.drawable.ic_location_on_black_24dp));
         drawerItems.add(new DrawerItem("edition_international", R.string.nav_edition_international, R.drawable.ic_location_on_black_24dp));
         drawerItems.add(new DrawerItem("about", R.string.nav_about, R.drawable.ic_info_outline_black_24dp));
-        DrawerListAdapter drawerListAdapter = new DrawerListAdapter(this, drawerItems);
+        final DrawerListAdapter drawerListAdapter = new DrawerListAdapter(this, drawerItems);
         drawerListView.setAdapter(drawerListAdapter);
         drawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                new AlertDialog.Builder(FeedActivity.this)
-                        .setMessage(Html.fromHtml(getString(R.string.about_message)))
-                        .setCancelable(true)
-                        .create()
-                        .show();
+                DrawerItem drawerItem = drawerListAdapter.getItem(position);
+                switch (drawerItem.getId()) {
+                    case "about":
+                        showAbout();
+                        break;
+                    case "Sports":
+
+                }
             }
         });
 
@@ -72,5 +75,17 @@ public class FeedActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         drawerToggle.syncState();
+    }
+
+    private void showAbout() {
+        new AlertDialog.Builder(FeedActivity.this)
+                .setMessage(Html.fromHtml(getString(R.string.about_message)))
+                .setCancelable(true)
+                .create()
+                .show();
+    }
+
+    private void showSection(String section) {
+        // TODO: implement logic
     }
 }
