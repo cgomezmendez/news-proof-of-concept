@@ -14,7 +14,6 @@ public class LauncherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO: implement routing logic
         startActivity(new Intent(this, FeedActivity.class));
     }
 }

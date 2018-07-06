@@ -79,6 +79,6 @@ public class StoriesRemoteDataSource implements StoriesDataSource {
 
     @Override
     public void getStory(@NonNull LoadStoryCallback callback, String id) {
-        //TODO: Implement logic
+        //TODO: Implement logic (As for the moment not needed cause we are getting it from cache)
     }
 }
