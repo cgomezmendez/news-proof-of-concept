@@ -27,6 +27,9 @@ public class FeedPresenter implements FeedContract.Presenter {
     public FeedPresenter(FeedContract.View feedView, String section) {
         this.feedView = feedView;
         this.section = section;
+        feedView.setPresenter(this);
+        storiesRepository = StoriesRepository.getInstance(StoriesRemoteDataSource.getInstance(),
+                new StoryLocalDataSource());
     }
 
     @Override
