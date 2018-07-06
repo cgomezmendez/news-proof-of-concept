@@ -12,4 +12,5 @@
     <dimen name="image_normal_height">24dp</dimen>
     <dimen name="image_big_height">250dp</dimen>
     <dimen name="image_big_width">250dp</dimen>
+    <dimen name="drawer_width">200dp</dimen>
 </resources>

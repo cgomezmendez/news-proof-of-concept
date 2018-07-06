@@ -2,6 +2,7 @@ package me.cristiangomez.news.feed;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -14,6 +15,7 @@ public class FeedActivity extends AppCompatActivity {
     private FeedPresenter feedPresenter;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle drawerToggle;
+    private ListView drawerListView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,6 +26,10 @@ public class FeedActivity extends AppCompatActivity {
         FeedFragment feedFragment = (FeedFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.feed_content);
         mDrawerLayout = findViewById(R.id.feed_drawer);
+        drawerListView = findViewById(R.id.feed_drawer_list);
+
+        drawerListView.setAdapter(new DrawerListAdapter(this, ));
+
         drawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         feedPresenter = new FeedPresenter(feedFragment);
     }
