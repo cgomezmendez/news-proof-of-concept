@@ -21,7 +21,15 @@
         <p>Proof of concept app using <a href="https://open-platform.theguardian.com/documentation/">The Guardian Api</a>.
             As per <a href="https://www.upwork.com/jobs/~01f100073dc9a61db1">requirements</a>using no external libraries only android/java sdk.
         </p>
-        <p>Contact me at <a href="mailto:cristiangomezmendez@gmail.com">cristiangomezmendez@gmail.com</a></p></html>]]> </string>
+        <p><a href="https://gitlab.com/cristiangomezmendez/news-proof-of-concept">Source code</a></p>
+        <p>Contact me at</p>
+        <ul style="list-type:none;">
+        <li><a href="mailto:cristiangomezmendez@gmail.com">cristiangomezmendez@gmail.com</a></li>
+        <li><a href="https://github.com/cgomezmendez">Github</a></li>
+        <li><a href="https://www.facebook.com/cristian.gomez.m">Facebook</a></li>
+        <li><a href="tel:+18094239985">+18094239985</a></li>
+        </ul>
+        </html>]]> </string>
     <string name="nav_technology">Technology</string>
     <string name="nav_politics">Politics</string>
     <string name="feed_front_page_subtitle">Front page</string>

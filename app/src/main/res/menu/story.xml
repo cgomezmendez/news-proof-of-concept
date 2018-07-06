@@ -6,6 +6,6 @@
         app:showAsAction="ifRoom"
         android:title="@string/story_share"
         android:icon="@drawable/ic_share_black_24dp"
-        app:iconTint="@color/colorAccent"
+        app:iconTint="@android:color/white"
         />
 </menu>

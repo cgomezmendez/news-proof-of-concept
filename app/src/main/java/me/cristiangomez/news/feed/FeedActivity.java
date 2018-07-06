@@ -3,10 +3,14 @@ package me.cristiangomez.news.feed;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,11 +87,12 @@ public class FeedActivity extends AppCompatActivity {
     }
 
     private void showAbout() {
-        new AlertDialog.Builder(FeedActivity.this)
+        AlertDialog dialog = new AlertDialog.Builder(FeedActivity.this)
                 .setMessage(Html.fromHtml(getString(R.string.about_message)))
                 .setCancelable(true)
-                .create()
-                .show();
+                .create();
+        dialog.show();
+        ((TextView)dialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     private void showSection(String section, String title) {
