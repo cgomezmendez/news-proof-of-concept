@@ -24,6 +24,11 @@ public class FeedPresenter implements FeedContract.Presenter {
                 new StoryLocalDataSource());
     }
 
+    public FeedPresenter(FeedContract.View feedView, String section) {
+        this.feedView = feedView;
+        this.section = section;
+    }
+
     @Override
     public void loadStories(final int page) {
         isRequestInProgress = true;

@@ -3,6 +3,7 @@ package me.cristiangomez.news.feed;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -32,8 +33,6 @@ public class FeedActivity extends AppCompatActivity {
         setContentView(R.layout.feed_act);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FeedFragment feedFragment = (FeedFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.feed_content);
         mDrawerLayout = findViewById(R.id.feed_drawer);
         drawerListView = findViewById(R.id.feed_drawer_list);
         List<DrawerItem> drawerItems = new ArrayList<>();
@@ -51,6 +50,7 @@ public class FeedActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 DrawerItem drawerItem = drawerListAdapter.getItem(position);
+                mDrawerLayout.closeDrawer(Gravity.LEFT|Gravity.START);
                 switch (drawerItem.getId()) {
                     case "home":
                         break;
@@ -65,7 +65,7 @@ public class FeedActivity extends AppCompatActivity {
         });
 
         drawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
-        feedPresenter = new FeedPresenter(feedFragment);
+        showSection(null);
     }
 
     @Override
@@ -89,6 +89,9 @@ public class FeedActivity extends AppCompatActivity {
     }
 
     private void showSection(String section) {
-        // TODO: implement logic
+        FeedFragment feedFragment = new FeedFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.feed_content, feedFragment);
+        feedPresenter = new FeedPresenter(feedFragment, section);
     }
 }

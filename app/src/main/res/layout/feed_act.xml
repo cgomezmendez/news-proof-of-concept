@@ -12,9 +12,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <include layout="@layout/app_toolbar" />
-        <fragment
+        <FrameLayout
             android:id="@+id/feed_content"
-            android:name="me.cristiangomez.news.feed.FeedFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@layout/feed_frag" />
