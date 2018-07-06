@@ -40,10 +40,10 @@ public class FeedActivity extends AppCompatActivity {
         drawerItems.add(new DrawerItem("home", R.string.nav_home, R.drawable.ic_home_black_24dp));
         drawerItems.add(new DrawerItem("World", R.string.nav_world, R.drawable.ic_language_black_24dp));
         drawerItems.add(new DrawerItem("Sports", R.string.nav_sports, R.drawable.ic_directions_bike_black_24dp));
-        drawerItems.add(new DrawerItem("edition_australia", R.string.nav_edition_australia, R.drawable.ic_location_on_black_24dp));
-        drawerItems.add(new DrawerItem("edition_uk", R.string.nav_edition_uk, R.drawable.ic_location_on_black_24dp));
-        drawerItems.add(new DrawerItem("edition_us", R.string.nav_edition_us, R.drawable.ic_location_on_black_24dp));
-        drawerItems.add(new DrawerItem("edition_international", R.string.nav_edition_international, R.drawable.ic_location_on_black_24dp));
+        drawerItems.add(new DrawerItem("australia-news", R.string.nav_edition_australia, R.drawable.ic_location_on_black_24dp));
+        drawerItems.add(new DrawerItem("uk-news", R.string.nav_edition_uk, R.drawable.ic_location_on_black_24dp));
+        drawerItems.add(new DrawerItem("us-news", R.string.nav_edition_us, R.drawable.ic_location_on_black_24dp));
+        drawerItems.add(new DrawerItem("world", R.string.nav_edition_international, R.drawable.ic_location_on_black_24dp));
         drawerItems.add(new DrawerItem("about", R.string.nav_about, R.drawable.ic_info_outline_black_24dp));
         final DrawerListAdapter drawerListAdapter = new DrawerListAdapter(this, drawerItems);
         drawerListView.setAdapter(drawerListAdapter);
@@ -52,11 +52,14 @@ public class FeedActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 DrawerItem drawerItem = drawerListAdapter.getItem(position);
                 switch (drawerItem.getId()) {
+                    case "home":
+                        break;
                     case "about":
                         showAbout();
                         break;
-                    case "Sports":
-
+                    default:
+                        showSection(drawerItem.getId());
+                        break;
                 }
             }
         });
