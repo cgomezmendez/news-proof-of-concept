@@ -106,6 +106,7 @@ public class StoryFragment extends Fragment implements StoryContract.View {
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_TEXT, story.getWebUrl().toString());
             shareIntent.putExtra(Intent.EXTRA_TITLE, story.getWebTitle());
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, story.getWebTitle());
             startActivity(Intent.createChooser(shareIntent, getString(R.string.story_share_using)));
             return true;
         }
