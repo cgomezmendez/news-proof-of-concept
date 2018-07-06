@@ -91,7 +91,8 @@ public class FeedActivity extends AppCompatActivity {
     private void showSection(String section) {
         FeedFragment feedFragment = new FeedFragment();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.feed_content, feedFragment);
+                .replace(R.id.feed_content, feedFragment)
+        .commit();
         feedPresenter = new FeedPresenter(feedFragment, section);
     }
 }
