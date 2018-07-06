@@ -14,6 +14,7 @@ import me.cristiangomez.news.data.source.remote.StoriesRemoteDataSource;
 public class FeedPresenter implements FeedContract.Presenter {
     private final FeedContract.View feedView;
     private StoriesRepository storiesRepository;
+    private boolean isRequestInProgress;
 
     public FeedPresenter(@NonNull  FeedContract.View feedView) {
         this.feedView = feedView;
@@ -24,17 +25,21 @@ public class FeedPresenter implements FeedContract.Presenter {
 
     @Override
     public void loadStories(final int page) {
+        isRequestInProgress = true;
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 storiesRepository.getStories(new StoriesDataSource.LoadStoriesCallback() {
                     @Override
                     public void onStoriesLoaded(List<Story> stories) {
+                        isRequestInProgress = false;
+                        feedView.hideRefreshLoadingAnimation();
                         FeedPresenter.this.feedView.showStories(stories);
                     }
                     @Override
                     public void onNoDataAvailable() {
-
+                        feedView.hideRefreshLoadingAnimation();
+                        isRequestInProgress = false;
                     }
                 }, page);
             }
@@ -49,6 +54,14 @@ public class FeedPresenter implements FeedContract.Presenter {
 
     @Override
     public void start() {
+        feedView.showRefreshLoadingAnimation();
         loadStories(1);
+    }
+
+    @Override
+    public void refresh() {
+        if (!isRequestInProgress) {
+            loadStories(1);
+        }
     }
 }

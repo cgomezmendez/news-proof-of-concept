@@ -11,10 +11,15 @@ public interface FeedContract {
     interface View extends BaseView<Presenter> {
         void showStories(List<Story> stories);
         void showStoryDetailsUi(String storyId);
+
+        void hideRefreshLoadingAnimation();
+
+        void showRefreshLoadingAnimation();
     }
 
     interface Presenter extends BasePresenter {
         void loadStories(int page);
         void openStoryDetails(@NonNull Story requestedStory);
+        void refresh();
     }
 }

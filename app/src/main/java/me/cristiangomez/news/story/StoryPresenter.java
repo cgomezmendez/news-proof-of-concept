@@ -34,7 +34,6 @@ public class StoryPresenter implements StoryContract.Presenter {
 
                     @Override
                     public void onNoDataAvailable() {
-
                     }
                 }, storyId);
             }

@@ -15,6 +15,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import me.cristiangomez.news.R;
 import me.cristiangomez.news.data.Story;
 import me.cristiangomez.news.data.StorySection;
@@ -25,15 +26,18 @@ public class FeedFragment extends Fragment implements FeedContract.View {
     private FeedContract.Presenter presenter;
     private ListView listView;
     private FeedListAdapter listAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void showStories(final List<Story> stories) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                listAdapter.addAll(stories);
-            }
-        });
+        if (getActivity() != null) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    listAdapter.addAll(stories);
+                }
+            });
+        }
     }
 
     @Override
@@ -54,6 +58,13 @@ public class FeedFragment extends Fragment implements FeedContract.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.feed_frag, container, false);
+        swipeRefreshLayout = view.findViewById(R.id.feed_swipe_container);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.refresh();
+            }
+        });
         listView = view.findViewById(R.id.feed_list_view);
         listView.setOnScrollListener(new EndLessScrollListener() {
             @Override
@@ -79,5 +90,29 @@ public class FeedFragment extends Fragment implements FeedContract.View {
     public void onResume() {
         super.onResume();
         presenter.start();
+    }
+
+    @Override
+    public void hideRefreshLoadingAnimation() {
+        if (getActivity() != null) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            });
+        }
+    }
+
+    @Override
+    public void showRefreshLoadingAnimation() {
+        if (getActivity() != null) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    swipeRefreshLayout.setRefreshing(true);
+                }
+            });
+        }
     }
 }
