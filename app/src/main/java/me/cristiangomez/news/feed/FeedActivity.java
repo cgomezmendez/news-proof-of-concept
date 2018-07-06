@@ -37,12 +37,13 @@ public class FeedActivity extends AppCompatActivity {
         drawerListView = findViewById(R.id.feed_drawer_list);
         List<DrawerItem> drawerItems = new ArrayList<>();
         drawerItems.add(new DrawerItem("home", R.string.nav_home, R.drawable.ic_home_black_24dp));
-        drawerItems.add(new DrawerItem("World", R.string.nav_world, R.drawable.ic_language_black_24dp));
-        drawerItems.add(new DrawerItem("Sports", R.string.nav_sports, R.drawable.ic_directions_bike_black_24dp));
+        drawerItems.add(new DrawerItem("politics", R.string.nav_politics, R.drawable.ic_record_voice_over_black_24dp));
+        drawerItems.add(new DrawerItem("technology", R.string.nav_technology, R.drawable.ic_devices_black_24dp));
+        drawerItems.add(new DrawerItem("sport", R.string.nav_sport, R.drawable.ic_directions_bike_black_24dp));
+        drawerItems.add(new DrawerItem("world", R.string.nav_world, R.drawable.ic_language_black_24dp));
         drawerItems.add(new DrawerItem("australia-news", R.string.nav_edition_australia, R.drawable.ic_location_on_black_24dp));
         drawerItems.add(new DrawerItem("uk-news", R.string.nav_edition_uk, R.drawable.ic_location_on_black_24dp));
         drawerItems.add(new DrawerItem("us-news", R.string.nav_edition_us, R.drawable.ic_location_on_black_24dp));
-        drawerItems.add(new DrawerItem("world", R.string.nav_edition_international, R.drawable.ic_location_on_black_24dp));
         drawerItems.add(new DrawerItem("about", R.string.nav_about, R.drawable.ic_info_outline_black_24dp));
         final DrawerListAdapter drawerListAdapter = new DrawerListAdapter(this, drawerItems);
         drawerListView.setAdapter(drawerListAdapter);
@@ -58,14 +59,14 @@ public class FeedActivity extends AppCompatActivity {
                         showAbout();
                         break;
                     default:
-                        showSection(drawerItem.getId());
+                        showSection(drawerItem.getId(), getString(drawerItem.getTitle()));
                         break;
                 }
             }
         });
 
         drawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
-        showSection(null);
+        showSection(null, getString(R.string.feed_front_page_subtitle));
     }
 
     @Override
@@ -88,11 +89,14 @@ public class FeedActivity extends AppCompatActivity {
                 .show();
     }
 
-    private void showSection(String section) {
+    private void showSection(String section, String title) {
         FeedFragment feedFragment = new FeedFragment();
         feedPresenter = new FeedPresenter(feedFragment, section);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.feed_content, feedFragment)
         .commit();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setSubtitle(title);
+        }
     }
 }
