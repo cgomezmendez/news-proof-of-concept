@@ -5,4 +5,8 @@
     <string name="feed_story_full_story">Full story</string>
     <string name="feed_title">News Feed</string>
     <string name="loading_more_stories">Loading more stories</string>
+    <string name="feed_error_loading">Error loading swipe to retry</string>
+    <string name="no_stories">No stories to show</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
 </resources>

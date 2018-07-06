@@ -15,6 +15,8 @@ public interface FeedContract {
         void hideLoadingAnimation();
 
         void showRefreshLoadingAnimation();
+
+        void showErrorWhileLoading();
     }
 
     interface Presenter extends BasePresenter {

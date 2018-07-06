@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/feed_drawer"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <include layout="@layout/app_toolbar" />
-    <fragment
-        android:id="@+id/feed_content"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="me.cristiangomez.news.feed.FeedFragment"
-        tools:layout="@layout/feed_frag"
+        android:orientation="vertical">
+        <include layout="@layout/app_toolbar" />
+        <fragment
+            android:id="@+id/feed_content"
+            android:name="me.cristiangomez.news.feed.FeedFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/feed_frag" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|start"
+        android:text="Testing"
         />
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class FeedFragment extends Fragment implements FeedContract.View {
     private FeedListAdapter listAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private View endLessScrollProgressView;
+    private View noStoriesView;
 
     @Override
     public void showStories(final List<Story> stories) {
@@ -59,6 +61,7 @@ public class FeedFragment extends Fragment implements FeedContract.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.feed_frag, container, false);
+        noStoriesView = view.findViewById(R.id.feed_no_stories);
         endLessScrollProgressView = view.findViewById(R.id.feed_endless_progress);
         swipeRefreshLayout = view.findViewById(R.id.feed_swipe_container);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -101,6 +104,7 @@ public class FeedFragment extends Fragment implements FeedContract.View {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    noStoriesView.setVisibility(View.GONE);
                     swipeRefreshLayout.setRefreshing(false);
                     endLessScrollProgressView.setVisibility(View.INVISIBLE);
                 }
@@ -115,6 +119,21 @@ public class FeedFragment extends Fragment implements FeedContract.View {
                 @Override
                 public void run() {
                     swipeRefreshLayout.setRefreshing(true);
+                }
+            });
+        }
+    }
+
+    @Override
+    public void showErrorWhileLoading() {
+        if (getActivity() != null) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(requireContext(), R.string.feed_error_loading, Toast.LENGTH_SHORT).show();
+                    if (listAdapter.isEmpty()) {
+                        noStoriesView.setVisibility(View.VISIBLE);
+                    }
                 }
             });
         }

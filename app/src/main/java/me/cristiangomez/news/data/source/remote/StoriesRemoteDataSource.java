@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import me.cristiangomez.news.BuildConfig;
@@ -38,6 +39,7 @@ public class StoriesRemoteDataSource implements StoriesDataSource {
         HttpURLConnection urlConnection = null;
         try {
             urlConnection = (HttpURLConnection) new URL(url).openConnection();
+            urlConnection.setConnectTimeout((int)TimeUnit.SECONDS.toMicros(15));
             InputStream inputStream = urlConnection.getInputStream();
             ByteArrayOutputStream result = new ByteArrayOutputStream();
             byte[] buffer = new byte[1024];
@@ -51,11 +53,13 @@ public class StoriesRemoteDataSource implements StoriesDataSource {
                             .getJSONObject("response"));
             if (apiResponse.getStatus().equalsIgnoreCase("ok")) {
                 callback.onStoriesLoaded(apiResponse.getResults());
+            } else {
+                callback.onNoDataAvailable();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            callback.onNoDataAvailable();
         } catch (JSONException e) {
-            e.printStackTrace();
+            callback.onNoDataAvailable();
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();

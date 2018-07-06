@@ -39,6 +39,7 @@ public class FeedPresenter implements FeedContract.Presenter {
                     @Override
                     public void onNoDataAvailable() {
                         feedView.hideLoadingAnimation();
+                        feedView.showErrorWhileLoading();
                         isRequestInProgress = false;
                     }
                 }, page);
@@ -48,7 +49,6 @@ public class FeedPresenter implements FeedContract.Presenter {
 
     @Override
     public void openStoryDetails(@NonNull Story requestedStory) {
-        // TODO: implement logic
         feedView.showStoryDetailsUi(requestedStory.getId());
     }
 
