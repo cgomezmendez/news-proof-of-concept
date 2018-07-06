@@ -10,4 +10,11 @@
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
     <string name="nav_about">About</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_edition_australia">Australia edition</string>
+    <string name="nav_edition_uk">UK edition</string>
+    <string name="nav_edition_us">United States edition</string>
+    <string name="nav_edition_international">International edition</string>
+    <string name="nav_world">World</string>
+    <string name="nav_sports">Sports</string>
 </resources>
