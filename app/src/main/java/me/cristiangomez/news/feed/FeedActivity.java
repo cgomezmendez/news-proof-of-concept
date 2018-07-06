@@ -54,6 +54,7 @@ public class FeedActivity extends AppCompatActivity {
                 mDrawerLayout.closeDrawer(Gravity.LEFT|Gravity.START);
                 switch (drawerItem.getId()) {
                     case "home":
+                        showSection(null, getString(R.string.feed_front_page_subtitle));
                         break;
                     case "about":
                         showAbout();

@@ -1,9 +1,13 @@
 package me.cristiangomez.news.story;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -15,6 +19,8 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.ShareActionProvider;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import me.cristiangomez.news.R;
 import me.cristiangomez.news.data.Image;
@@ -28,6 +34,13 @@ public class StoryFragment extends Fragment implements StoryContract.View {
     private ProgressBar progressBarView;
     private TextView titleView;
     private WebView contentView;
+    private ShareActionProvider shareActionProvider;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true  );
+    }
 
     @Nullable
     @Override
@@ -62,6 +75,11 @@ public class StoryFragment extends Fragment implements StoryContract.View {
                     thumbnailView.setImageResource(R.drawable.ic_image_black_24dp);
                     progressBarView.setVisibility(View.GONE);
                 }
+                Intent shareIntent = new Intent();
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, story.getWebTitle());
+                shareIntent.putExtra(Intent.EXTRA_TEXT, story.getWebUrl());
+                setShareIntent(shareIntent);
             }
         });
     }
@@ -75,5 +93,19 @@ public class StoryFragment extends Fragment implements StoryContract.View {
     public void onResume() {
         super.onResume();
         presenter.start();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.story, menu);
+        MenuItem menuItem = menu.findItem(R.id.menu_item_share);
+        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    private void setShareIntent(Intent intent) {
+        if (shareActionProvider != null) {
+            shareActionProvider.setShareIntent(intent);
+        }
     }
 }

@@ -25,4 +25,5 @@
     <string name="nav_technology">Technology</string>
     <string name="nav_politics">Politics</string>
     <string name="feed_front_page_subtitle">Front page</string>
+    <string name="story_share">Share</string>
 </resources>
