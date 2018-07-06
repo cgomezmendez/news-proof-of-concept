@@ -2,6 +2,9 @@ package me.cristiangomez.news.feed;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.text.Html;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -9,6 +12,7 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -43,6 +47,16 @@ public class FeedActivity extends AppCompatActivity {
         drawerItems.add(new DrawerItem("about", R.string.nav_about, R.drawable.ic_info_outline_black_24dp));
         DrawerListAdapter drawerListAdapter = new DrawerListAdapter(this, drawerItems);
         drawerListView.setAdapter(drawerListAdapter);
+        drawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                new AlertDialog.Builder(FeedActivity.this)
+                        .setMessage(Html.fromHtml(getString(R.string.about_message)))
+                        .setCancelable(true)
+                        .create()
+                        .show();
+            }
+        });
 
         drawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         feedPresenter = new FeedPresenter(feedFragment);
